@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <!-- Common stuff for all pages -->
+    <!-- Jinja replaces stuff inside braces by arguments passed in the python code -->
+    <!-- It also supports conditional statements -->
+    <head>
+        {% if title %}
+        <title>{{ title }} - Microblog </title>
+        {% else %}
+        <title>Welcome to Microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Microblog: <a href="/index">Home</a></div>
+        <hr>
+        <!-- This stuff essentially allows inheritance by other templates, the name of this block is "content" -->
+        {% block content %}{% endblock %}
+    </body>
+</html>
