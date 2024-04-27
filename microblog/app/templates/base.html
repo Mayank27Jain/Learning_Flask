@@ -11,8 +11,22 @@
         {% endif %}
     </head>
     <body>
-        <div>Microblog: <a href="/index">Home</a></div>
+        <div>Microblog:
+        <!-- use url_for for easier and consistent mapping -->
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login' )}}">Login</a></div>
         <hr>
+        <!-- We will now display any messages -->
+        <!-- The function also deletes all existing messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         <!-- This stuff essentially allows inheritance by other templates, the name of this block is "content" -->
         {% block content %}{% endblock %}
     </body>

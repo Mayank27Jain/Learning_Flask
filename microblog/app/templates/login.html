@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<!-- form acts as a container, action string determines which url to send the data to. Empty means the URL which rendered this form -->
+<!-- novalidate means Flask will have to do the validation -->
+<form action="" method="post" novalidate>
+    <!-- the hidden tag in conjunction with the secret key does the protection bit -->
+    {{ form.hidden_tag() }}
+    <p>
+        <!-- the objects know how to render themselves. add additional values as parameters -->
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        <!-- The validator may have caught some errors -->
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
